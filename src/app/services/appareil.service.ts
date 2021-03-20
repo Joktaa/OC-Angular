@@ -78,14 +78,28 @@ export class AppareilService {
 
   saveAppareilToServeur() {
     this.httpClient
-    .put('https://http-client-demo-5ef42-default-rtdb.firebaseio.com/appareils.json', this.appareils)
-    .subscribe(
-      () => {
-        console.log("Enregistrement terminé");
-      },
-      (error) => {
-        console.error("Erreur de sauvegarde " + error);
-      }
-    )
+      .put('https://http-client-demo-5ef42-default-rtdb.firebaseio.com/appareils.json', this.appareils)
+      .subscribe(
+        () => {
+          console.log("Enregistrement terminé");
+        },
+        (error) => {
+          console.error("Erreur de sauvegarde " + error);
+        }
+      )
+  }
+
+  getAppareilFromServer() {
+    this.httpClient
+      .get<any[]>('https://http-client-demo-5ef42-default-rtdb.firebaseio.com/appareils.json')
+      .subscribe(
+        (response) => {
+          this.appareils = response;
+          this.emitAppareilSubject()
+        },
+        (error) => {
+          console.error("Erreur de chargement " + error);
+        }
+      )
   }
 }

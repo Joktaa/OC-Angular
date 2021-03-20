@@ -47,4 +47,8 @@ export class AppareilViewComponent implements OnInit {
   onSave() {
     this.appareilService.saveAppareilToServeur();
   }
+
+  onFetch() {
+    this.appareilService.getAppareilFromServer();
+  }
 }
